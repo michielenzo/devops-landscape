@@ -14,8 +14,16 @@ services:
     ports:
       - 443:443
       - 80:80
-          
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:ro  
+      - ./certbot/conf/archive/michielidema.net/:/etc/nginx/ssl/archive/michielidema.net/
 
+  certbot:
+    image: certbot/certbot:latest
+    volumes:
+      - ./certbot/www/:/var/www/certbot/:rw
+      - ./certbot/conf/:/etc/letsencrypt/:rw    
+          
 volumes:
   jenkins_home:
     
